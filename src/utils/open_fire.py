@@ -5,6 +5,7 @@ import requests
 Currently unused, messaging via openfire database/service
 """
 
+
 def create_openfire_user(username, password):
     url = "http://localhost:9090/plugins/restapi/v1/users"
 
@@ -13,7 +14,7 @@ def create_openfire_user(username, password):
       "password": password
     })
     headers = {
-      'Authorization': 'Basic YWRtaW46bWFzMjAyMQ==',
+      'Authorization': '',
       'Content-Type': 'application/json'
     }
 
