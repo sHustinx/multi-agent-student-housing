@@ -8,7 +8,14 @@ COOP = "cooptation"
 RAND = "random_assignment"
 WAIT_LIST = "waiting_list"
 
-TICK_TIME = .6
+"""
+SETUP SIMULATION
+"""
+
+NUMBER_STUDENTS = 50
+NUMBER_HOUSES = 4
+DISTR_METHODS = [1, 0, 0]
+
 DEFAULT_APPLICATION_DAYS = 2
 EXTRA_COOP_DAYS = 2
 DEFAULT_RENT_PERIOD = 104
@@ -16,6 +23,10 @@ SIMULATION_DURATION = 52 * 10
 SAVE_DATA_EVERY_X = 1
 CHECK_COMP_EVERY_X = 10
 WARM_UP_TICKS = 1
+
+"""
+FORMULAS
+"""
 
 
 def dist(x, y):
@@ -27,9 +38,6 @@ def dist(x, y):
     """
     squares = [abs(p - q) for p, q in zip(x, y)]
     return sum(squares) / len(squares)
-
-
-max_distance = dist([-1] * 5, [1] * 5)
 
 
 def calculate_dist(questionnaire1, questionnaire2):
@@ -65,7 +73,8 @@ def calculate_house_matching_score(house):
             if roommate["id"] is room["id"] or roommate["questionnaire"] is None:
                 continue
             roommates += 1
-            roommates_score += calculate_dist(room["questionnaire"]["personality_vector"], roommate["questionnaire"]["personality_vector"])
+            roommates_score += calculate_dist(room["questionnaire"]["personality_vector"],
+                                              roommate["questionnaire"]["personality_vector"])
         if roommates > 0:
             sum_match_score += roommates_score / roommates
 
