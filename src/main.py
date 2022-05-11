@@ -10,7 +10,7 @@ houses = []
 
 
 def setup_simulation(num_houses, num_students, percentage_accepting_international, percentage_international,
-                     percentage_female, dist=[1, 0, 0]):
+                     percentage_female, dist):
     """
     Setup of the Multi-Agent simulation
 
@@ -95,7 +95,7 @@ if __name__ == "__main__":
 
     # start simulation
     # num_houses, num_students, percentage_accepting_international, percentage_international, percentage_female
-    sim = setup_simulation(8, 80, .6, 0, .5)
+    sim = setup_simulation(const.NUMBER_HOUSES, const.NUMBER_STUDENTS, .6, 0, .5, const.DISTR_METHODS)
 
     # add listing- an visualization-agent to system
     sim.add_agent(list_agent)
