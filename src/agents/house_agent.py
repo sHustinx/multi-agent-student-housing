@@ -32,6 +32,7 @@ class HouseAgent(MASAgent):
                 'resident_jid': None,
                 'questionnaire': None,
                 'listed': False,
+                'listing_time': False,
                 'application_in_process': False,
                 'housing_method': appl_type,
                 'applicants': [],
@@ -72,6 +73,10 @@ class HouseAgent(MASAgent):
             """
             for room_id in self.agent.rooms:
                 room = self.agent.rooms[room_id]
+                if room['listed']:
+                    room['listing_time'] += 1
+                else:
+                    room['listing_time'] = 0
                 if room['resident_jid'] is not None:
                     room['contract_days_left'] -= 1
                     if room['contract_days_left'] == 4:
@@ -86,10 +91,11 @@ class HouseAgent(MASAgent):
                         msg = create_message("listing_agent@localhost", "request", {'room_id': room_id},
                                              {'request-type': 'remove-listing'})
                         self.send(msg)
-                    room['application_days_left'] -= 1
 
-                    if room['application_days_left'] <= 0:
-                        self.on_application_end(room)
+                room['application_days_left'] -= 1
+
+                if room['application_days_left'] <= 0:
+                    self.on_application_end(room)
             self.post_listings()
 
         def on_application_end(self, room):
@@ -219,6 +225,11 @@ class HouseAgent(MASAgent):
             room = self.agent.rooms[cancellation['room_id']]
             room['applicants'] = list(
                 filter(lambda x: x['student_jid'] != str(received_msg.sender), room['applicants']))
+
+            if len(room['applicants']) == 0 and room['resident_jid'] is None and room['application_days_left'] <= const.EXTRA_COOP_DAYS:
+                room['listed'] = False
+                room['application_days_left'] = get_application_days(room['housing_method'])
+                room['application_in_process'] = False
 
     class ReceiveHouseScore(MASReceivingBehaviour):
         """

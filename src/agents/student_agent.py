@@ -24,6 +24,7 @@ class StudentAgent(MASAgent):
         self.total_waiting_time = 0
         self.num_applications = 0
         self.num_rooms_obtained = 0
+        self.ticks_in_current_room = 0
         self.started = False
         self.has_room = False
         self.is_searching = True
@@ -31,6 +32,7 @@ class StudentAgent(MASAgent):
         self.house_jid = None
         self.house_score = None
         self.house_attractiveness = 0
+        self.house_compatibility = 0
         self.has_applied = False
         self.applied_rooms = [
 
@@ -47,10 +49,12 @@ class StudentAgent(MASAgent):
         requests open room listings from listing agent and updates students waiting-time accordingly
         """
         def run(self):
-            if self.agent.has_room and (self.agent.sim.ticks_passed % const.CHECK_COMP_EVERY_X == 0):
-                msg = create_message(self.agent.house_jid, "request", {"student_jid": self.agent.identifier},
-                                     {'request-type': 'house-score'})
-                self.send(msg)
+            if self.agent.has_room:
+                self.agent.ticks_in_current_room += 1
+                if self.agent.ticks_in_current_room > const.DEFAULT_RENT_PERIOD / 2 and (self.agent.ticks_in_current_room % const.CHECK_COMP_EVERY_X == 0):
+                    msg = create_message(self.agent.house_jid, "request", {"student_jid": self.agent.identifier},
+                                         {'request-type': 'house-score'})
+                    self.send(msg)
                 return
             if not self.agent.is_searching:
                 return
@@ -61,8 +65,9 @@ class StudentAgent(MASAgent):
                                      {"request-type": "listings"})
                 self.send(msg)
 
-            self.agent.waiting_time += 1
-            self.agent.total_waiting_time += 1
+            if self.agent.started:
+                self.agent.waiting_time += 1
+                self.agent.total_waiting_time += 1
 
     class ReceiveRoomContractProposal(MASReceivingBehaviour):
         """
@@ -88,6 +93,11 @@ class StudentAgent(MASAgent):
             self.agent.house_jid = proposal['house_jid']
             self.agent.house_attractiveness = proposal['house_attractiveness']
             self.agent.has_applied = False
+            self.agent.ticks_in_current_room = 0
+
+            msg = create_message(self.agent.house_jid, "request", {"student_jid": self.agent.identifier},
+                                 {'request-type': 'house-score'})
+            self.send(msg)
 
             # cancel other applications
             for (house, room_id) in self.agent.applied_rooms:
@@ -145,7 +155,10 @@ class StudentAgent(MASAgent):
             proposal = json.loads(received_msg.body)
             self.agent.house_score = proposal['house_score']
             compatibility = const.calculate_dist(self.agent.questionnaire['personality_vector'], self.agent.house_score)
-            if compatibility < .95:
+
+            if self.agent.ticks_in_current_room == 0:
+                self.agent.house_compatibility = compatibility
+            elif compatibility < self.agent.house_compatibility:
                 self.agent.is_searching = True
 
     class ReceiveRoomListings(MASReceivingBehaviour):
