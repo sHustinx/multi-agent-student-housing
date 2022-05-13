@@ -63,25 +63,27 @@ The json file provides an output of the student and house-data at each simulatio
 #### Simulation-gifs
 
 _The resulting gifs of the simulation runs (co-optation, 50-50, random assignment) with 400 houses and 3000 students:_
-![](.\visualization\400_coop.gif)
-![](.\visualization\400_mixed.gif)
-![](.\visualization\400_random.gif)
+
+![](https://github.com/sHustinx/multi-agent-student-housing/blob/main/visualization/400_coop.gif) 
+![](https://github.com/sHustinx/multi-agent-student-housing/blob/main/visualization/400_mixed.gif)
+![](https://github.com/sHustinx/multi-agent-student-housing/blob/main/visualization/400_random.gif)
 
 
 _The resulting gifs of the simulation runs (co-optation, 50-50, random assignment) with 600 houses and 3000 students:_
-![](.\visualization\600_coop.gif)
-![](.\visualization\600_mixed.gif)
-![](.\visualization\600_random.gif)
+
+![](https://github.com/sHustinx/multi-agent-student-housing/blob/main/visualization/600_coop.gif)
+![](https://github.com/sHustinx/multi-agent-student-housing/blob/main/visualization/600_mixed.gif)
+![](https://github.com/sHustinx/multi-agent-student-housing/blob/main/visualization/600_random.gif)
 
 #### Average Matching-Score
 
 The average matching-score of all houses per simulation step with 400 houses and 3000 students.
 
-![](.\visualization\avg_score_400.svg)
+![](https://github.com/sHustinx/multi-agent-student-housing/blob/main/visualization/avg_score_400.svg)
 
 The average matching-score of all houses per simulation step with 600 houses and 3000 students.
 
-![](.\visualization\avg_score_600.svg)
+![](https://github.com/sHustinx/multi-agent-student-housing/blob/main/visualization/avg_score_600.svg)
 
 
 #### Distribution over time
@@ -90,11 +92,12 @@ These figures show the distribution of searching/resident student over the simul
 
 _With 400 houses and 3000 students:_
 
-![](.\visualization\dist-over-time1.png)
-![](.\visualization\dist-over-time2.png)
-![](.\visualization\dist-over-time3.png)
+![](https://github.com/sHustinx/multi-agent-student-housing/blob/main/visualization/dist-over-time1.png)
+![](https://github.com/sHustinx/multi-agent-student-housing/blob/main/visualization/dist-over-time2.png)
+![](https://github.com/sHustinx/multi-agent-student-housing/blob/main/visualization/dist-over-time3.png)
 
 _With 600 houses and 3000 students:_
-![](.\visualization\dist-over-time4.png)
-![](.\visualization\dist-over-time5.png)
-![](.\visualization\dist-over-time6.png)
+
+![](https://github.com/sHustinx/multi-agent-student-housing/blob/main/visualization/dist-over-time4.png)
+![](https://github.com/sHustinx/multi-agent-student-housing/blob/main/visualization/dist-over-time5.png)
+![](https://github.com/sHustinx/multi-agent-student-housing/blob/main/visualization/dist-over-time6.png)
