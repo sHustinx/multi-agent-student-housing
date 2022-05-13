@@ -54,9 +54,35 @@ The simulation generates two timestamped output-files for each run, one .gif and
 The gif shows a simplified overview of the student-agents in the system (top-row) and an overview of the house-agents (block below the students).
 
 For the student-agents, dark green shows a student that is currently searching for a room and a light green shows a resident student.
-For the houses, each column represents a house, and each row in that column represents a room in that house. If a room is white, it means that there is a student living there, a yellow color means the room is empty and listed.
+For the houses, each column represents a house, and each row in that column represents a room in that house. If a room is white, it means that there is a student living there, a yellow color means the room is empty and listed. The houses are sorted by attractiveness, from most attractive (left) to least attractive (right).
 
 The json file provides an output of the student and house-data at each simulation step for further visualization and analysis.
+Some of the resulting statistics can be seen below:
+
+#### Means of inter-house compatibility
+
+| **Distribution**        | **400 Houses**    |  **600 Houses**    |
+|--------------|-----------|----------|
+|Co-Optation | avg: 0.933 std: 0.011 |  avg: 0.910 std: 0.017|
+|50-50 | avg: 0.909 std: 0.033 |  avg: 0.909 std: 0.027 |
+|Random assignment | avg: 0.891 std: 0.018 |  avg:  0.896 std: 0.020|
+
+#### Average waiting-time per student
+
+| **Distribution**        | **400 Houses**    |  **600 Houses**    |
+|--------------|-----------|----------|
+|Co-Optation | avg: 78.979 std: 106.855 |  avg: 3.783 std: 1.825|
+|50-50 | avg: 60.651 std: 59.480 |  avg: 4.101 std: 1.647 |
+|Random assignment | avg: 51.980 std: 38.299 |  avg:  4.759 std: 1.751|
+
+#### Number of students (out of 3000) that do not find a room throughout simulation period
+
+| **Distribution**        | **400 Houses**    |  **600 Houses**    |
+|--------------|-----------|----------|
+|Co-Optation | 63 |  0|
+|50-50 | 2 |  0|
+|Random assignment | 0 |  0|
+
 
 ### Visualization
 
