@@ -47,6 +47,54 @@ The settings of the two runs we compare in this project are as follows:
 |Rent period | 104 steps |
 |Application open | 2 steps |   
 |Additional co-op time | 2 ticks | 
+
 ### Simulation Results
+The simulation generates two timestamped output-files for each run, one .gif and one .json file. 
+
+The gif shows a simplified overview of the student-agents in the system (top-row) and an overview of the house-agents (block below the students).
+
+For the student-agents, dark green shows a student that is currently searching for a room and a light green shows a resident student.
+For the houses, each column represents a house, and each row in that column represents a room in that house. If a room is white, it means that there is a student living there, a yellow color means the room is empty and listed.
+
+The json file provides an output of the student and house-data at each simulation step for further visualization and analysis.
 
 ### Visualization
+
+#### Simulation-gifs
+
+_The resulting gifs of the simulation runs (co-optation, 50-50, random assignment) with 400 houses and 3000 students:_
+![](.\visualization\400_coop.gif)
+![](.\visualization\400_mixed.gif)
+![](.\visualization\400_random.gif)
+
+
+_The resulting gifs of the simulation runs (co-optation, 50-50, random assignment) with 600 houses and 3000 students:_
+![](.\visualization\600_coop.gif)
+![](.\visualization\600_mixed.gif)
+![](.\visualization\600_random.gif)
+
+#### Average Matching-Score
+
+The average matching-score of all houses per simulation step with 400 houses and 3000 students.
+
+![](.\visualization\avg_score_400.svg)
+
+The average matching-score of all houses per simulation step with 600 houses and 3000 students.
+
+![](.\visualization\avg_score_600.svg)
+
+
+#### Distribution over time
+
+These figures show the distribution of searching/resident student over the simulation-period per distribution method.
+
+_With 400 houses and 3000 students:_
+
+![](.\visualization\dist-over-time1.png)
+![](.\visualization\dist-over-time2.png)
+![](.\visualization\dist-over-time3.png)
+
+_With 600 houses and 3000 students:_
+![](.\visualization\dist-over-time4.png)
+![](.\visualization\dist-over-time5.png)
+![](.\visualization\dist-over-time6.png)
